@@ -1,12 +1,16 @@
 __author__ = 'Don'
 import wolframalpha
 
-def translate_english_to_language(word, language):
+def translate_english_to_language (word, language):
     word = word.lower()
     eng_to = word+" from english to "+language
     client = wolframalpha.Client('3X8WHP-6EV4Q5KJ9T')
     res = client.query(eng_to)
-    return (next(res.results).text)
+    for pod in res.pods:
+        if "translate" in pod.text:
+            pass
+        else:
+            return pod.text
 
 def clean_answer(answer):
     answer = answer.split("|")

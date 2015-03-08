@@ -72,7 +72,13 @@ class Question():
         return clean_answer(translate_english_to_language(question, language))
 
     def text_question(self, message):
-        sendMessage("+19287560154", "+19288974783", message)
+        user_number = input("What's your phone number?: ")
+        sendMessage("+19287560154", "+1"+ user_number, message)
+        
+    def next_question(self):
+        self.word = random.choice(self.load_questions)
+        print(self.word)
+        return self.question.text_question(self.word)
         
 Joshquiz = Quiz("Josh")
 Joshquiz.load_user_info()
@@ -93,15 +99,15 @@ def hello_monkey():
     
     #print(Joshquiz.send_question)
     if Joshquiz.question.get_word() == str(body).lower():
-        message = "Good job! You got that one correct!"
-        # Get New Question, add a point
-        Joshquiz.add_score(1)
-        print(Joshquiz.score)
+        message = "Good job! You got that one correct!" # Your score is + str(Joshquiz.score)
+        # Joshquiz.question.next_question()
     else:
         message = "Incorrect, your score is reset! Here's a new question."
         # Get new question
-        Joshquiz.set_score(0)
-    
+        # Joshquiz.set_score(0)
+    # Joshquiz.score += 1
+    # Joshquiz.question.next_question()
+    print(Joshquiz.score)
     resp = twilio.twiml.Response()
     resp.message(message)
  
