@@ -94,26 +94,19 @@ app = Flask(__name__)
  
 @app.route("/", methods=['GET', 'POST'])
 def hello_monkey():
-    #from_number = request.values.get('From', None)
     body = request.values.get('Body', None)
     
-    #print(Joshquiz.send_question)
     if Joshquiz.question.get_word() == str(body).lower():
-        message = "Good job! You got that one correct!" # Your score is + str(Joshquiz.score)
-        # Joshquiz.question.next_question()
+        message = "Good job! You got that one correct!" 
     else:
-        message = "Incorrect, your score is reset! Here's a new question."
-        # Get new question
-        # Joshquiz.set_score(0)
-    # Joshquiz.score += 1
-    # Joshquiz.question.next_question()
+        message = "Incorrect. The correct answer is " + str(Joshquiz.question.get_word())
+
     print(Joshquiz.score)
     resp = twilio.twiml.Response()
     resp.message(message)
  
     return str(resp)
 
-#app.debug = True
 app.run(host='0.0.0.0', port=port) 
 
  
