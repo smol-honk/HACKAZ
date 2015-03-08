@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Quiz Text</title>
+		<style>
+			.container { position:relative; padding:0 0 0 55px; }
+			#sidebar {
+				float: left;
+				top:0; bottom:0; left:0;
+				border:1px solid #fff; width:150px; height:140px
+			}
+			#content { 
+				border:1px solid #fff; width:600px;
+				background: #fff;
+				margin:5px 0 5px 0;
+			}
+			#footer { 
+				border:1px solid #fff; width:600px;
+				margin:5px 0 5px 0;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<div class="container" align="center">
+
+			<div id="content" align="center">
+				Who are you texting?
+				<form action="/" method="post">
+                    <p>
+					<input type="text" name="to" />
+                    </p>
+					<p>
+					What's your message?
+					</p>
+					<textarea name="body" rows="5" cols="40"></textarea>
+					<br>
+					<button type="submit" name="Send">Send</button>
+					<br>
+					<br>
+					<br>
+				{% block title %} Index {% endblock %}
+				{% with messages = get_flashed_messages() %}
+					{% if messages %}
+						Your message:
+						<pre>
+							{% for message in messages %}
+{{message}}
+							{% endfor %}
+						</pre>
+					{% endif %}
+				{% endwith %}
+				</form>
+			</div>
+			
+		</div>
+	</body>
+</html>
