@@ -96,6 +96,7 @@ app = Flask(__name__)
 @app.route("/", methods=['GET', 'POST'])
 
 def hello_monkey():
+    
     body = request.values.get('Body', None)
     
     if Joshquiz.question.get_word() == str(body).lower():
@@ -106,11 +107,7 @@ def hello_monkey():
     resp = twilio.twiml.Response()
     resp.message(message)
     
-    return render_template('index.html')
+    # return render_template('index.html')
     return str(resp)
 
 app.run(host='0.0.0.0', port=port) 
-
- 
-
-
