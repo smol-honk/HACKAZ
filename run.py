@@ -1,6 +1,7 @@
 from twilio.rest import TwilioRestClient
 from Twilio_send import sendMessage
 from WolframAlpha import translate_english_to_language, clean_answer
+from flask import render_template
 import random
 from flask import Flask, request, redirect, session
 import twilio.twiml
@@ -72,8 +73,8 @@ class Question():
         return clean_answer(translate_english_to_language(question, language))
 
     def text_question(self, message):
-        user_number = input("What's your phone number?: ")
-        sendMessage("+19287560154", "+1"+ user_number, message)
+        user_number = str(6025031617)
+        sendMessage("+19287560154", "+1" + user_number, message)
         
     def next_question(self):
         self.word = random.choice(self.load_questions)
@@ -86,13 +87,14 @@ Joshquiz.getQuestion()
 print(Joshquiz.send_question)
     
 
-
+############# Flask Twilio Application ################
 
 port = int(os.environ.get('PORT', 5000))
 
 app = Flask(__name__)
- 
+
 @app.route("/", methods=['GET', 'POST'])
+
 def hello_monkey():
     body = request.values.get('Body', None)
     
@@ -101,10 +103,10 @@ def hello_monkey():
     else:
         message = "Incorrect. The correct answer is " + str(Joshquiz.question.get_word())
 
-    print(Joshquiz.score)
     resp = twilio.twiml.Response()
     resp.message(message)
- 
+    
+    return render_template('index.html')
     return str(resp)
 
 app.run(host='0.0.0.0', port=port) 

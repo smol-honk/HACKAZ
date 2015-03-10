@@ -1,9 +1,8 @@
-##Alec Davidson - Summer 2014
 import flask, flask.views, os, send_sms
 
 app = flask.Flask(__name__)
 
-app.secret_key = "GenericKey"  # figure out how to hide this or something idk probs not important for this project
+app.secret_key = "GenericKey" 
 
 class View(flask.views.MethodView):
     def get(self):
