@@ -101,10 +101,12 @@ def hello_monkey():
     
     if Joshquiz.question.get_word() == str(body).lower():
         message = "Good job! You got that one correct!" 
-        Joshquiz.getQuestion()
+        if Joshquiz.question.get_word() == str(body).lower():
+            Joshquiz.getQuestion()
+        else:
+            Joshquiz.getQuestion()
     else:
         message = "Incorrect. The correct answer is " + str(Joshquiz.question.get_word())
-        Joshquiz.getQuestion()
 
     resp = twilio.twiml.Response()
     resp.message(message)
