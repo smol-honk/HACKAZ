@@ -107,9 +107,8 @@ def hello_monkey():
     resp = twilio.twiml.Response()
     resp.message(message)
     
-    Joshquiz.getQuestion()
-    
     # return render_template('index.html')
     return str(resp)
+    Joshquiz.getQuestion()
 
 app.run(host='0.0.0.0', port=port) 
