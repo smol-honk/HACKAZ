@@ -7,6 +7,7 @@ from flask import Flask, request, redirect, session
 import twilio.twiml
 import os
 from server import app
+import continuation
 
 
 class Quiz():
@@ -100,15 +101,13 @@ def hello_monkey():
     body = request.values.get('Body', None)
     
     if Joshquiz.question.get_word() == str(body).lower():
-        message = "Good job! You got that one correct!" 
+        message = "Good job! You got " + str(body).lower()+ " correct!" 
     else:
         message = "Incorrect. The correct answer is " + str(Joshquiz.question.get_word())
         
     resp = twilio.twiml.Response()
     resp.message(message)
-    
-    # return render_template('index.html')
+    # Joshquiz.getQuestion()
     return str(resp)
-    Joshquiz.getQuestion()
 
 app.run(host='0.0.0.0', port=port) 
