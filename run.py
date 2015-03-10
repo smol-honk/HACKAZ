@@ -103,10 +103,11 @@ def hello_monkey():
         message = "Good job! You got that one correct!" 
     else:
         message = "Incorrect. The correct answer is " + str(Joshquiz.question.get_word())
-
-    Joshquiz.getQuestion()
+        
     resp = twilio.twiml.Response()
     resp.message(message)
+    
+    Joshquiz.getQuestion()
     
     # return render_template('index.html')
     return str(resp)
